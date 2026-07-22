@@ -3,7 +3,14 @@ import { createClient } from "@supabase/supabase-js";
 // ─── Initialize Real Supabase Client ─────────────────────────────────────────
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-export const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null as any;
+
+let client = null;
+if (supabaseUrl && supabaseUrl.startsWith("http")) {
+  client = createClient(supabaseUrl, supabaseKey);
+} else if (supabaseUrl) {
+  console.warn("Invalid Supabase URL provided. Please check your environment variables or AI Studio settings.");
+}
+export const supabase = client as any;
 
 // ─── Default Data for Seeding ────────────────────────────────────────────────
 export const DEFAULT_SHOPS = [

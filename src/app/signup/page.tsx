@@ -183,6 +183,7 @@ export default function SellerSignupPage() {
 
       // 4. Submit pending confirmation for admin review
       const { error: pendingError } = await supabase.from("pending_confirmations").insert({
+        id: "pend-" + Date.now(),
         shop_name: shopName,
         owner_name: fullName,
         phone,
