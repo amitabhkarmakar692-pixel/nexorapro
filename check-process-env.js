@@ -1,6 +1,5 @@
 const { Client } = require('pg');
 const connectionString = 'postgresql://postgres:60660nexorabro%40@db.hbnlxzcmbkinzkitrlps.supabase.co:5432/postgres';
-console.log('ConnectionString:', connectionString);
 const client = new Client({
   connectionString: connectionString,
   ssl: { rejectUnauthorized: false }
